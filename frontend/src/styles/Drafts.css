@@ -1,0 +1,246 @@
+.draftsWrap {
+  max-width: 520px;
+  margin: 30px auto;
+  padding: 0 14px;
+  font-family: Inter, system-ui, Arial, sans-serif;
+}
+
+.draftTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.backBtn2 {
+  border: none;
+  background: white;
+  border-radius: 12px;
+  padding: 10px 12px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+  cursor: pointer;
+}
+
+.addBtn {
+  border: none;
+  color: white;
+  font-weight: 800;
+  border-radius: 12px;
+  padding: 10px 14px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #0ea5e9, #6366f1);
+  box-shadow: 0 12px 26px rgba(99,102,241,0.25);
+}
+
+.info {
+  text-align: center;
+  margin: 16px 0;
+  color: #334155;
+  font-weight: 600;
+}
+
+.info.error {
+  color: #b91c1c;
+}
+
+.emptyBox {
+  margin-top: 26px;
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(148,163,184,0.35);
+  border-radius: 16px;
+  padding: 18px;
+  text-align: center;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+}
+
+.primaryBtn {
+  margin-top: 10px;
+  border: none;
+  color: white;
+  font-weight: 800;
+  border-radius: 12px;
+  padding: 10px 14px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #0ea5e9, #6366f1);
+}
+
+.draftList {
+  display: grid;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.draftCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(148,163,184,0.35);
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.draftCard:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 34px rgba(0,0,0,0.10);
+}
+
+.draftAvatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, rgba(14,165,233,0.18), rgba(99,102,241,0.18));
+  font-size: 1.2rem;
+}
+
+.draftInfo h4 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.draftInfo p {
+  margin: 2px 0;
+  color: #334155;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.muted {
+  color: #64748b !important;
+  font-weight: 600;
+}
+
+.badge {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  font-size: 0.75rem;
+  font-weight: 900;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(245, 158, 11, 0.15);
+  color: #92400e;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+.draftRight{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.deleteBtn{
+  border: none;
+  padding: 7px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  background: #ffebee;
+  color: #c62828;
+  transition: transform 0.12s ease, opacity 0.2s ease;
+}
+
+.deleteBtn:hover{
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.deleteBtn:active{
+  transform: translateY(1px);
+}
+/* =========================
+   DARK MODE – Drafts
+   ========================= */
+
+body[data-theme="dark"] .draftsWrap{
+  color: var(--text);
+}
+
+/* Top buttons */
+body[data-theme="dark"] .backBtn2{
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.14);
+  color: var(--text);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.45);
+}
+
+body[data-theme="dark"] .addBtn{
+  box-shadow: 0 14px 30px rgba(0,0,0,0.45);
+}
+
+/* Info text */
+body[data-theme="dark"] .info{
+  color: var(--muted);
+}
+
+body[data-theme="dark"] .info.error{
+  color: #ff6b6b;
+}
+
+/* Empty state */
+body[data-theme="dark"] .emptyBox{
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.14);
+  color: var(--text);
+  box-shadow: 0 16px 34px rgba(0,0,0,0.45);
+}
+
+/* Draft cards */
+body[data-theme="dark"] .draftCard{
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 16px 34px rgba(0,0,0,0.45);
+}
+
+body[data-theme="dark"] .draftCard:hover{
+  box-shadow: 0 22px 44px rgba(0,0,0,0.55);
+}
+
+/* Avatar */
+body[data-theme="dark"] .draftAvatar{
+  background: linear-gradient(
+    135deg,
+    rgba(110,160,255,0.25),
+    rgba(99,102,241,0.25)
+  );
+}
+
+/* Text inside card */
+body[data-theme="dark"] .draftInfo h4{
+  color: var(--text);
+}
+
+body[data-theme="dark"] .draftInfo p{
+  color: var(--muted);
+}
+
+body[data-theme="dark"] .muted{
+  color: var(--muted) !important;
+}
+
+/* Badge */
+body[data-theme="dark"] .badge{
+  background: rgba(245,158,11,0.18);
+  color: #ffd08a;
+  border: 1px solid rgba(245,158,11,0.35);
+}
+
+/* Delete button */
+body[data-theme="dark"] .deleteBtn{
+  background: rgba(239,68,68,0.18);
+  color: #ff9a9a;
+}
+
+body[data-theme="dark"] .deleteBtn:hover{
+  background: rgba(239,68,68,0.25);
+}

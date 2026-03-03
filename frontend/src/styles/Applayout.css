@@ -1,0 +1,30 @@
+.app-shell{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-content{
+  flex: 1;
+  padding-bottom: 90px; /* space for bottom nav */
+}
+/* App shell */
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.bottom-nav-wrap {
+  background: transparent;     /* remove white background */
+  border-top: none;            /* remove top line */
+}
+
+
+/* Main scrollable content */
+.app-content {
+  flex: 1;
+  overflow-y: auto;
+
+  /* 🔑 THIS IS THE KEY */
+  padding-bottom: 96px; /* height of BottomNav */
+}

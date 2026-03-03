@@ -1,0 +1,48 @@
+.payments-card {
+  padding: 14px;
+  color: var(--text);
+}
+
+.payments-list {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pay-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px;
+  background: var(--card-strong);
+  color: var(--text);
+}
+
+.pay-name {
+  font-weight: 800;
+  color: var(--text);
+}
+
+.pay-status {
+  font-size: 12px;
+  margin-top: 4px;
+  color: var(--muted);
+}
+
+.pay-status.overdue {
+  color: #ff4d4f;
+  font-weight: 900;
+}
+
+.pay-status.dueSoon {
+  color: #ffb020;
+  font-weight: 900;
+}
+
+.pay-amt {
+  font-weight: 900;
+  color: var(--text);
+}

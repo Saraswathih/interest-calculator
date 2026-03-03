@@ -1,0 +1,399 @@
+/* =========================
+   BASE LAYOUT (THEME READY)
+   ========================= */
+
+.home-container {
+  min-height: 100vh;
+  width: 100%;
+  background: transparent; /* ✅ body handles background via theme */
+  padding-top: 30px;
+  padding-bottom: 110px; /* space for bottom nav */
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  color: var(--text);
+}
+
+.dashboard-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+/* ✅ Laptop layout first */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  margin-top: 18px;
+  align-items: start;
+}
+
+/* =========================
+   CARDS / COMMON UI (THEME)
+   ========================= */
+
+/* .card {
+  background: var(--card);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 16px;
+
+  border: 1px solid var(--border);
+  color: var(--text);
+} */
+ .card {
+    background: var(--card);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    padding: 16px;
+    margin: 10px;
+    color: var(--text);
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.card-title h3 {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.pill {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(60, 120, 255, 0.14);
+  color: var(--text);
+  font-weight: 800;
+  font-size: 12px;
+  border: 1px solid var(--border);
+}
+
+/* =========================
+   BETTER TRANSACTIONS UI (THEME)
+   ========================= */
+
+.tx-card {
+  background: var(--card);
+  border-radius: 18px;
+  padding: 16px;
+  margin-top: 14px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  color: var(--text);
+}
+
+.tx-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.tx-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.tx-subtitle {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.tx-muted {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.tx-error {
+  margin: 0;
+  font-size: 13px;
+  color: #ff4d4f;
+}
+
+/* Summary */
+.tx-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.tx-summary-item {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px;
+}
+
+body[data-theme="light"] .tx-summary-item {
+  background: rgba(2, 6, 23, 0.03);
+}
+
+.tx-label {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.tx-value {
+  display: block;
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--text);
+}
+
+/* List */
+.tx-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 460px;
+  overflow: auto;
+  padding-right: 6px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.tx-row {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 12px;
+  background: var(--card-strong);
+  color: var(--text);
+}
+
+.tx-row-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.tx-badge {
+  font-size: 12px;
+  font-weight: 900;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.tx-badge.given {
+  background: rgba(34, 197, 94, 0.18);
+}
+
+.tx-badge.taken {
+  background: rgba(239, 68, 68, 0.18);
+}
+
+.tx-date {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.tx-row-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.tx-kv {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 0;
+}
+
+.tx-k {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.tx-v {
+  font-size: 13px;
+  font-weight: 900;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+  color: var(--text);
+}
+
+/* =========================
+   QUICK ACTIONS (buttons stay same, but text readable)
+   ========================= */
+
+.quick-actions-row {
+  display: flex;
+  gap: 12px;
+  margin: 14px 0 16px;
+}
+
+.addCustomerBtn {
+  flex: 1;
+  background: linear-gradient(135deg, #ff7a18, #ffb347);
+  border: none;
+  border-radius: 16px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: #fff;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.18);
+}
+
+.plusCircle {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.btnText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.1;
+}
+
+.btnText b {
+  font-size: 14px;
+}
+
+.btnText small {
+  font-size: 11px;
+  opacity: 0.9;
+  margin-top: 3px;
+}
+
+.addTxBtn {
+      flex: 1;
+    background: linear-gradient(135deg, #ff7a18, #ffb347);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 12px 14px;
+    cursor: pointer;
+    font-weight: 800;}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-container {
+    padding-top: 16px;
+    padding-bottom: 95px;
+  }
+
+  .dashboard-wrapper {
+    padding: 0 12px;
+  }
+
+  .tx-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tx-row-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tx-list {
+    max-height: 340px;
+  }
+
+  .tx-card {
+    padding: 14px;
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 420px) {
+  .home-container {
+    padding-top: 12px;
+    padding-bottom: 95px;
+  }
+
+  .tx-title {
+    font-size: 15px;
+  }
+
+  .tx-value {
+    font-size: 15px;
+  }
+
+  .tx-row {
+    padding: 10px;
+  }
+
+  .tx-badge {
+    padding: 5px 9px;
+    font-size: 11px;
+  }
+}
+
+/* ✅ Make All Transactions height smaller (match left side better) */
+.tx-card--all .tx-list{
+  max-height: 220px;
+}
+
+/* Scrollbar (theme aware) */
+.tx-card--all .tx-list::-webkit-scrollbar{
+  width: 6px;
+}
+.tx-card--all .tx-list::-webkit-scrollbar-thumb{
+  background: rgba(255,255,255,0.22);
+  border-radius: 999px;
+}
+body[data-theme="light"] .tx-card--all .tx-list::-webkit-scrollbar-thumb{
+  background: rgba(2,6,23,0.15);
+}
+
+/* =========================
+   FIX DASHBOARD BALANCE
+   ========================= */
+
+.tx-card--scroll{
+  height: 420px;
+  display: flex;
+  flex-direction: column;
+}
+
+.tx-card--scroll .tx-list{
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 6px;
+}

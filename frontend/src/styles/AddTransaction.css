@@ -1,0 +1,470 @@
+/* ========= Theme ========= */
+:root {
+  --bg1: #0ea5e9;      /* sky */
+  --bg2: #6366f1;      /* indigo */
+  --card: rgba(255, 255, 255, 0.9);
+  --border: rgba(255, 255, 255, 0.6);
+  --text: #0f172a;
+  --muted: #475569;
+  --focus: rgba(99, 102, 241, 0.25);
+  --shadow: 0 18px 45px rgba(15, 23, 42, 0.18);
+}
+
+/* Optional: full page background */
+body {
+  background: radial-gradient(1200px 700px at 10% 10%, rgba(14,165,233,.25), transparent 60%),
+              radial-gradient(1000px 650px at 90% 20%, rgba(99,102,241,.25), transparent 55%),
+              linear-gradient(135deg, #f8fafc, #eef2ff);
+}
+
+/* ========= Card ========= */
+.transaction-card {
+  max-width: 540px;
+  margin: 50px auto;
+  padding: 26px 22px;
+
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+
+  font-family: Inter, system-ui, Arial, sans-serif;
+  color: var(--text);
+
+  /* Entry animation */
+  animation: cardPop 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Top colorful glow bar */
+.transaction-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 8px;
+  background: linear-gradient(90deg, var(--bg1), var(--bg2));
+}
+
+/* ========= Heading ========= */
+.transaction-card h3 {
+  text-align: center;
+  font-size: 1.65rem;
+  margin: 10px 0 22px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+/* ========= Form ========= */
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 7px;
+  font-weight: 600;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* Inputs / Selects */
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 12px 12px;
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  border-radius: 12px;
+  font-size: 1rem;
+  box-sizing: border-box;
+
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--text);
+
+  transition: transform 0.15s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.form-group input:hover,
+.form-group select:hover {
+  transform: translateY(-1px);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: rgba(99, 102, 241, 0.75);
+  box-shadow: 0 0 0 5px var(--focus);
+}
+
+/* Make date input look clean */
+.form-group input[type="date"] {
+  padding-right: 14px;
+}
+
+/* ========= Button ========= */
+.save-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 13px 14px;
+  border: none;
+  border-radius: 14px;
+
+  font-size: 1.08rem;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+
+  color: white;
+  background: linear-gradient(135deg, var(--bg1), var(--bg2));
+  box-shadow: 0 14px 28px rgba(99, 102, 241, 0.25);
+
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+
+  transition: transform 0.12s ease, filter 0.2s ease, box-shadow 0.2s ease;
+}
+
+.save-btn:hover {
+  filter: brightness(1.05);
+  box-shadow: 0 18px 34px rgba(99, 102, 241, 0.30);
+  transform: translateY(-1px);
+}
+
+.save-btn:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+/* Small ripple shine */
+.save-btn::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 60%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.22);
+  transform: rotate(25deg);
+  transition: left 0.5s ease;
+}
+
+.save-btn:hover::after {
+  left: 120%;
+}
+
+.save-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  filter: grayscale(0.2);
+  box-shadow: none;
+}
+/* Top back arrow */
+.transaction-top {
+  position: relative;
+  margin-bottom: 6px;
+}
+
+.back-arrow {
+  position: absolute;
+  top: -6px;
+  left: -6px;
+
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+
+  border: none;
+  cursor: pointer;
+
+  background: rgba(255, 255, 255, 0.85);
+  color: #0f172a;
+  font-size: 18px;
+  font-weight: 900;
+
+  box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.back-arrow:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.16);
+}
+
+.back-arrow:active {
+  transform: scale(0.95);
+}
+
+/* ========= Message (Success/Error) ========= */
+.message {
+  padding: 12px 12px;
+  margin-bottom: 14px;
+  border-radius: 12px;
+  font-weight: 700;
+  text-align: center;
+
+  /* message animation */
+  animation: slideDown 0.35s ease;
+}
+
+.message.success {
+  background: rgba(34, 197, 94, 0.12);
+  color: #166534;
+  border: 1px solid rgba(34, 197, 94, 0.28);
+}
+
+.message.error {
+  background: rgba(239, 68, 68, 0.12);
+  color: #7f1d1d;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+/* ========= Animations ========= */
+@keyframes cardPop {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========= Mobile ========= */
+@media (max-width: 600px) {
+  .transaction-card {
+    margin: 20px 14px;
+    padding: 22px 16px;
+  }
+}
+/* =========================
+   DARK MODE – Add Transaction
+   Paste at the BOTTOM
+   ========================= */
+
+body[data-theme="dark"]{
+  background: radial-gradient(1200px 700px at 10% 10%, rgba(14,165,233,.12), transparent 60%),
+              radial-gradient(1000px 650px at 90% 20%, rgba(99,102,241,.12), transparent 55%),
+              linear-gradient(180deg, #0b1220, #070b14);
+}
+
+/* Card in dark */
+body[data-theme="dark"] .transaction-card{
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 30px 90px rgba(0,0,0,0.55);
+  color: #eaf0ff;
+}
+
+/* Heading */
+body[data-theme="dark"] .transaction-card h3{
+  color: #eaf0ff;
+}
+
+/* Labels */
+body[data-theme="dark"] .form-group label{
+  color: rgba(234,240,255,0.75);
+}
+
+/* Inputs / Selects */
+body[data-theme="dark"] .form-group input,
+body[data-theme="dark"] .form-group select{
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.16);
+  color: #eaf0ff;
+}
+
+/* Placeholder */
+body[data-theme="dark"] .form-group input::placeholder{
+  color: rgba(234,240,255,0.55);
+}
+
+/* Focus ring */
+body[data-theme="dark"] .form-group input:focus,
+body[data-theme="dark"] .form-group select:focus{
+  border-color: rgba(99,102,241,0.75);
+  box-shadow: 0 0 0 5px rgba(99,102,241,0.20);
+}
+
+/* Date icon visibility (Chrome) */
+body[data-theme="dark"] input[type="date"]{
+  color-scheme: dark;
+}
+
+/* Button shadow darker */
+body[data-theme="dark"] .save-btn{
+  box-shadow: 0 18px 50px rgba(0,0,0,0.45);
+}
+
+/* Messages */
+body[data-theme="dark"] .message.success{
+  background: rgba(34,197,94,0.14);
+  color: #9ff2c2;
+  border: 1px solid rgba(34,197,94,0.28);
+}
+
+body[data-theme="dark"] .message.error{
+  background: rgba(239,68,68,0.14);
+  color: #ffb4b4;
+  border: 1px solid rgba(239,68,68,0.28);
+}
+/* ===============================
+   DARK MODE FIX – ADD TRANSACTION
+   =============================== */
+
+/* ✅ 1) When YOU set theme manually */
+body[data-theme="dark"] .transaction-card {
+  background: rgba(17, 24, 39, 0.92);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #e5e7eb;
+}
+
+body[data-theme="dark"] .form-group label {
+  color: #9ca3af;
+}
+
+body[data-theme="dark"] .form-group input,
+body[data-theme="dark"] .form-group select {
+  background: rgba(31, 41, 55, 0.95);
+  color: #f9fafb;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+body[data-theme="dark"] .form-group input::placeholder {
+  color: #9ca3af;
+}
+
+body[data-theme="dark"] .form-group input:focus,
+body[data-theme="dark"] .form-group select:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 4px rgba(96,165,250,0.25);
+}
+
+/* 🔥 Fix select dropdown list */
+body[data-theme="dark"] select option {
+  background-color: #111827;
+  color: #f9fafb;
+}
+
+body[data-theme="dark"] select option:checked {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+body[data-theme="dark"] input[type="date"] {
+  color-scheme: dark;
+}
+
+/* ✅ 2) If user device is dark mode (optional support) */
+@media (prefers-color-scheme: dark) {
+  .transaction-card {
+    background: rgba(17, 24, 39, 0.92);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: #e5e7eb;
+  }
+
+  .form-group label { color: #9ca3af; }
+
+  .form-group input,
+  .form-group select {
+    background: rgba(31, 41, 55, 0.95);
+    color: #f9fafb;
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+
+  .form-group input::placeholder { color: #9ca3af; }
+
+  select option {
+    background-color: #111827;
+    color: #f9fafb;
+  }
+
+  select option:checked {
+    background-color: #2563eb;
+    color: #ffffff;
+  }
+
+  input[type="date"] { color-scheme: dark; }
+}
+.transaction-card{
+  max-width: 420px;
+  margin: 20px auto;
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.10);
+}
+
+.form-group{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.form-group label{
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.7);
+}
+
+.form-group input,
+.form-group select{
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.12);
+  padding: 0 12px;
+  outline: none;
+  font-size: 14px;
+  background: #fff;
+}
+
+.form-group input:focus,
+.form-group select:focus{
+  border-color: rgba(79,70,229,0.55);
+  box-shadow: 0 0 0 4px rgba(79,70,229,0.12);
+}
+
+/* ✅ Save Transaction Button */
+.save-transaction-btn{
+  width: 100%;
+  margin-top: 18px;
+  padding: 14px 16px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: #fff;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  box-shadow: 0 10px 22px rgba(79,70,229,0.28);
+}
+
+.save-transaction-btn:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(79,70,229,0.35);
+}
+
+.save-transaction-btn:active{
+  transform: scale(0.98);
+}
+
+.save-transaction-btn:disabled{
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}

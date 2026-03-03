@@ -1,0 +1,353 @@
+/* ---------- Theme variables ---------- */
+:root {
+  --bg: #f3f6ff;
+  --card: rgba(255, 255, 255, 0.75);
+  --text: #101828;
+  --muted: rgba(16, 24, 40, 0.55);
+  --border: rgba(0, 0, 0, 0.07);
+  --shadow: 0 14px 40px rgba(22, 40, 100, 0.10);
+  --shadow2: 0 10px 24px rgba(22, 40, 100, 0.08);
+  --accent: rgba(120, 160, 255, 0.85);
+}
+
+body[data-theme="dark"] {
+  --bg: #0b1220;
+  --card: rgba(255, 255, 255, 0.08);
+  --text: rgba(255, 255, 255, 0.92);
+  --muted: rgba(255, 255, 255, 0.55);
+  --border: rgba(255, 255, 255, 0.12);
+  --shadow: 0 18px 44px rgba(0, 0, 0, 0.45);
+  --shadow2: 0 10px 24px rgba(0, 0, 0, 0.30);
+  --accent: rgba(120, 160, 255, 0.92);
+}
+
+body {
+  background: radial-gradient(900px 420px at 20% 0%, rgba(120,160,255,0.22), transparent 60%),
+              radial-gradient(900px 420px at 80% 10%, rgba(255,120,180,0.12), transparent 62%),
+              var(--bg);
+  color: var(--text);
+}
+
+/* ---------- Layout ---------- */
+.profile-page {
+  padding: 18px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ---------- Header ---------- */
+.profile-header {
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.profile-header h3 {
+  margin: 0;
+  text-align: center;
+  font-size: 15px;
+  letter-spacing: 0.2px;
+}
+
+.back-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  box-shadow: var(--shadow2);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: transform 0.12s ease, background 0.12s ease;
+}
+
+.back-btn:hover { transform: translateY(-1px); }
+.back-btn:active { transform: translateY(0px) scale(0.98); }
+
+.ghost { width: 40px; height: 40px; }
+
+/* ---------- Profile Card ---------- */
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 20px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+  margin-bottom: 12px;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  color: var(--text);
+  background: linear-gradient(135deg, rgba(120,160,255,0.35), rgba(120,255,220,0.18));
+  border: 1px solid rgba(120,160,255,0.25);
+}
+
+.profile-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.profile-meta h4 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.profile-meta p {
+  margin: 3px 0 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.edit-btn {
+  padding: 9px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: rgba(120, 160, 255, 0.18);
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 12px;
+  transition: transform 0.12s ease, background 0.12s ease;
+}
+
+.edit-btn:hover { transform: translateY(-1px); background: rgba(120, 160, 255, 0.24); }
+.edit-btn:active { transform: scale(0.98); }
+
+/* ---------- Settings Card ---------- */
+.settings-card {
+  padding: 10px;
+  border-radius: 20px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+  margin-bottom: 12px;
+}
+
+.setting-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 12px;
+  border-radius: 16px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  transition: transform 0.12s ease, background 0.12s ease;
+}
+
+.setting-row:hover {
+  background: rgba(0, 0, 0, 0.04);
+  transform: translateY(-1px);
+}
+body[data-theme="dark"] .setting-row:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.setting-row + .setting-row {
+  margin-top: 6px;
+}
+
+.row-left {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.row-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  background: rgba(120, 160, 255, 0.14);
+  border: 1px solid rgba(120, 160, 255, 0.18);
+}
+
+.row-title {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.row-sub {
+  font-size: 11px;
+  margin-top: 3px;
+  color: var(--muted);
+}
+
+.chev {
+  width: 34px;
+  height: 34px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: rgba(0,0,0,0.04);
+  border: 1px solid var(--border);
+  opacity: 0.75;
+  font-size: 18px;
+}
+body[data-theme="dark"] .chev { background: rgba(255,255,255,0.06); }
+
+/* ---------- Logout ---------- */
+.logout-card {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 70, 70, 0.28);
+  background: rgba(255, 70, 70, 0.08);
+  box-shadow: var(--shadow2);
+  cursor: pointer;
+  font-weight: 800;
+  transition: transform 0.12s ease, background 0.12s ease;
+}
+
+.logout-card:hover { transform: translateY(-1px); background: rgba(255, 70, 70, 0.12); }
+.logout-chev { opacity: 0.8; }
+
+/* ---------- Theme Bottom Sheet ---------- */
+.sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 12px;
+  z-index: 50;
+}
+
+.sheet {
+  width: 100%;
+  max-width: 520px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 12px;
+  backdrop-filter: blur(14px);
+  box-shadow: var(--shadow);
+}
+
+.sheet-handle {
+  width: 46px;
+  height: 6px;
+  border-radius: 99px;
+  margin: 4px auto 10px;
+  background: rgba(0, 0, 0, 0.16);
+}
+body[data-theme="dark"] .sheet-handle { background: rgba(255, 255, 255, 0.18); }
+
+.sheet-title {
+  margin: 0 0 10px;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.sheet-option {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: transform 0.12s ease, background 0.12s ease;
+}
+body[data-theme="dark"]  .sheet-option { background: rgba(255, 255, 255, 0.06); }
+
+.sheet-option:hover { transform: translateY(-1px); }
+.sheet-option.selected { outline: 2px solid rgba(120,160,255,0.55); }
+
+.tick { font-weight: 900; }
+
+.sheet-close {
+  width: 100%;
+  padding: 12px;
+  border-radius: 16px;
+  border: 0;
+  background: rgba(120, 160, 255, 0.22);
+  cursor: pointer;
+  font-weight: 900;
+}
+/* ===============================
+   DARK MODE TEXT VISIBILITY FIX
+   =============================== */
+
+body[data-theme="dark"] {
+  color: #f1f5ff;
+}
+
+/* Titles */
+body[data-theme="dark"] h3,
+body[data-theme="dark"] h4,
+body[data-theme="dark"] .row-title {
+  color: #f8fbff;
+}
+
+/* Subtitles / secondary text */
+body[data-theme="dark"] .profile-meta p,
+body[data-theme="dark"] .row-sub {
+  color: rgba(235, 240, 255, 0.7);
+}
+
+/* Settings rows */
+body[data-theme="dark"] .setting-row {
+  color: #f3f6ff;
+}
+
+/* Icons background */
+body[data-theme="dark"] .row-icon {
+  background: rgba(120, 160, 255, 0.22);
+  border: 1px solid rgba(120, 160, 255, 0.35);
+  color: #ffffff;
+}
+
+/* Chevron arrow */
+body[data-theme="dark"] .chev {
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Edit button text */
+body[data-theme="dark"] .edit-btn {
+  color: #ffffff;
+}
+
+/* Logout button */
+body[data-theme="dark"] .logout-card {
+  color: #ffb4b4;
+  border: 1px solid rgba(255, 90, 90, 0.4);
+  background: rgba(255, 90, 90, 0.12);
+}
+
+/* Theme bottom sheet text */
+body[data-theme="dark"] .sheet,
+body[data-theme="dark"] .sheet-option,
+body[data-theme="dark"] .sheet-title {
+  color: #f6f9ff;
+}
+
+/* Sheet handle visibility */
+body[data-theme="dark"] .sheet-handle {
+  background: rgba(255, 255, 255, 0.25);
+}

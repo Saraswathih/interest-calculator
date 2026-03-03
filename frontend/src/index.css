@@ -1,0 +1,144 @@
+/* ===== Global Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;              /* ✅ add */
+  overflow-x: hidden;       /* ✅ add (stops right cut) */
+}
+
+/* ✅ Make sure root takes full width */
+#root {
+  width: 100%;              /* ✅ add */
+  min-height: 100vh;        /* ✅ add */
+}
+
+/* ===== App Theme (Light) ===== */
+:root {
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  /* ✅ Force light theme */
+  color: #111;
+  background: #f6f7fb;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ✅ Very important: remove flex centering from body */
+body {
+  margin: 0;                /* ✅ add */
+  padding: 0;               /* ✅ add */
+  min-height: 100vh;
+  background: #f6f7fb; /* same as your app */
+}
+
+/* Links */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Buttons (don’t override your component button styles heavily) */
+button {
+  font-family: inherit;
+}
+
+/* Optional: nicer selection */
+::selection {
+  background: rgba(39, 67, 255, 0.25);
+}
+body[data-theme="light"]{
+  background:#f3f6ff;
+  color:#111;
+}
+
+body[data-theme="dark"]{
+  background:#0f172a;
+  color:#f8fafc;
+}
+
+body[data-theme="dark"] .profile-card,
+body[data-theme="dark"] .profile-section,
+body[data-theme="dark"] .topbar{
+  background: rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.12);
+}
+/* ---------- THEME TOKENS (Light / Dark) ---------- */
+:root{
+  --bg: #f3f6ff;
+  --text: #0f172a;
+  --muted: rgba(15, 23, 42, 0.65);
+
+  --card: rgba(255, 255, 255, 0.75);
+  --card-strong: rgba(255, 255, 255, 0.92);
+  --border: rgba(2, 6, 23, 0.10);
+
+  --overlay: rgba(0, 0, 0, 0.35);
+
+  --input-bg: rgba(255, 255, 255, 0.92);
+  --input-border: rgba(2, 6, 23, 0.14);
+
+  --btn-primary: rgba(60, 120, 255, 0.22);
+  --btn-secondary: rgba(2, 6, 23, 0.06);
+
+  --shadow: 0 10px 30px rgba(2, 6, 23, 0.08);
+}
+
+body[data-theme="dark"]{
+  --bg: #0b1220;
+  --text: #eaf0ff;
+  --muted: rgba(234, 240, 255, 0.72);
+
+  --card: rgba(255, 255, 255, 0.08);
+  --card-strong: rgba(255, 255, 255, 0.12);
+  --border: rgba(255, 255, 255, 0.14);
+
+  --overlay: rgba(0, 0, 0, 0.55);
+
+  --input-bg: rgba(255, 255, 255, 0.10);
+  --input-border: rgba(255, 255, 255, 0.18);
+
+  --btn-primary: rgba(110, 160, 255, 0.22);
+  --btn-secondary: rgba(255, 255, 255, 0.10);
+
+  --shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+}
+
+/* Apply to whole app */
+body{
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ---------- GLOBAL THEME HELPERS ---------- */
+.card,
+.panel,
+.box,
+.widget {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  box-shadow: var(--shadow);
+}
+
+.muted,
+.subtext,
+.small-text {
+  color: var(--muted);
+}
+
+input, select, textarea {
+  background: var(--input-bg);
+  color: var(--text);
+  border: 1px solid var(--input-border);
+}

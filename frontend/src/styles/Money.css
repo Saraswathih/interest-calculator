@@ -1,0 +1,177 @@
+.money-page{
+  padding: 16px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.money-header{
+  text-align: left;
+  margin-bottom: 10px;
+}
+.money-header h3{
+  margin: 0;
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.money-tabs{
+  display: flex;
+  background: rgba(120,160,255,0.10);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.tab{
+  flex: 1;
+  padding: 10px 8px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 800;
+  color: rgba(16,24,40,0.65);
+}
+body[data-theme="dark"] .tab{
+  color: rgba(235,240,255,0.70);
+}
+
+.tab.active{
+  background: rgba(120,160,255,0.28);
+  color: var(--text);
+}
+
+.money-card{
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 12px;
+  box-shadow: var(--shadow2);
+  backdrop-filter: blur(12px);
+}
+
+.money-card-top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.money-card-top h4{
+  margin: 0;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.link-btn{
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 800;
+  color: rgba(120,160,255,0.95);
+}
+
+.money-list{
+  display: grid;
+  gap: 10px;
+}
+
+.money-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding: 10px 10px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.35);
+}
+body[data-theme="dark"] .money-row{
+  background: rgba(255,255,255,0.06);
+}
+
+.row-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.mini-avatar{
+  width: 34px;
+  height: 34px;
+  border-radius: 14px;
+  display:grid;
+  place-items:center;
+  font-weight: 900;
+  background: rgba(120,160,255,0.18);
+  border: 1px solid rgba(120,160,255,0.22);
+}
+
+.row-name{
+  font-size: 12.5px;
+  font-weight: 900;
+  color: var(--text);
+}
+.row-sub{
+  font-size: 11px;
+  margin-top: 2px;
+  color: var(--muted);
+}
+
+.row-right{
+  text-align: right;
+  display: grid;
+  gap: 4px;
+}
+
+.row-due{
+  font-size: 11px;
+  font-weight: 900;
+}
+.row-amt{
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.red{ color: #ff4d4f; }
+
+.edit-mini{
+  border: 1px solid var(--border);
+  background: rgba(120,160,255,0.14);
+  border-radius: 10px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-weight: 900;
+  font-size: 11px;
+  color: var(--text);
+}
+.pay-badge{
+  border: 1px solid rgba(255, 80, 80, 0.45);
+  background: rgba(255, 80, 80, 0.14);
+  color: #ff4d4f;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-weight: 900;
+  font-size: 11px;
+  cursor: pointer;
+}
+.pay-badge:hover{
+  background: rgba(255, 80, 80, 0.18);
+}
+.pay-btn{
+  background: rgba(255,80,80,0.15);
+  border: 1px solid rgba(255,80,80,0.4);
+  color: #ff4d4f;
+  border-radius: 10px;
+  padding: 6px 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.to-pay-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
