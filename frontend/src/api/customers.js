@@ -1,17 +1,20 @@
-const BASE = "http://localhost:5000/api/customers";
+// const BASE = "http://localhost:5000/api/customers";
+const BASE = "https://interest-calculator-1-t620.onrender.com/api/customers";
 
-// ✅ helper: safely read JSON or text
+// helper: safely read JSON or text
 async function parseResponse(res) {
   const text = (await res.text()).trim();
 
-  // If backend is down / wrong URL, sometimes it returns HTML
-  const isProbablyHTML = text.startsWith("<!DOCTYPE") || text.startsWith("<html");
+  const isProbablyHTML =
+    text.startsWith("<!DOCTYPE") || text.startsWith("<html");
 
   if (!res.ok) {
     if (!text) throw new Error("Request failed");
 
     if (isProbablyHTML) {
-      throw new Error("Server not reachable or wrong API URL (got HTML response)");
+      throw new Error(
+        "Server not reachable or wrong API URL (got HTML response)"
+      );
     }
 
     try {
@@ -25,7 +28,9 @@ async function parseResponse(res) {
   if (!text) return null;
 
   if (isProbablyHTML) {
-    throw new Error("Server not reachable or wrong API URL (got HTML response)");
+    throw new Error(
+      "Server not reachable or wrong API URL (got HTML response)"
+    );
   }
 
   try {
@@ -35,39 +40,40 @@ async function parseResponse(res) {
   }
 }
 
-// ✅ GET all customers (draft + active)
+// GET all customers
 export async function fetchCustomers() {
   const res = await fetch(BASE);
   const data = await parseResponse(res);
   return Array.isArray(data) ? data : [];
 }
 
-// ✅ GET only draft customers
+// GET draft customers
 export async function fetchDraftCustomers() {
   const res = await fetch(`${BASE}/drafts`);
   const data = await parseResponse(res);
   return Array.isArray(data) ? data : [];
 }
 
-// ✅ GET only active customers
+// GET active customers
 export async function fetchActiveCustomers() {
   const res = await fetch(`${BASE}/active`);
   const data = await parseResponse(res);
   return Array.isArray(data) ? data : [];
 }
 
-// ✅ POST add customer (works for both draft & active)
-// call with: { name, phone, address, status: "draft" } OR status: "active"
+// POST add customer
 export async function addCustomer(form) {
   const res = await fetch(`${BASE}/add`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(form)
+    body: JSON.stringify(form),
   });
 
   const data = await parseResponse(res);
   return data || {};
 }
+
+// DELETE customer
 export async function deleteCustomer(id) {
   const res = await fetch(`${BASE}/${id}`, { method: "DELETE" });
   const data = await parseResponse(res);

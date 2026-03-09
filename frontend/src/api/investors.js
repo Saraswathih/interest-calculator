@@ -1,10 +1,14 @@
-const BASE = "http://localhost:5000/api/investors";
+const BASE = "https://interest-calculator-1-t620.onrender.com/api/investors";
 
 // GET all investors
 export async function fetchInvestors() {
   const res = await fetch(BASE);
   const text = (await res.text()).trim();
-  if (!res.ok) throw new Error(text || "Failed to fetch investors");
+
+  if (!res.ok) {
+    throw new Error(text || "Failed to fetch investors");
+  }
+
   return text ? JSON.parse(text) : [];
 }
 
@@ -13,10 +17,15 @@ export async function addInvestor(form) {
   const res = await fetch(`${BASE}/add`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(form)
+    body: JSON.stringify(form),
   });
+
   const text = (await res.text()).trim();
-  if (!res.ok) throw new Error(text || "Failed to add investor");
+
+  if (!res.ok) {
+    throw new Error(text || "Failed to add investor");
+  }
+
   return text ? JSON.parse(text) : {};
 }
 
@@ -24,7 +33,11 @@ export async function addInvestor(form) {
 export async function fetchInvestorById(id) {
   const res = await fetch(`${BASE}/${id}`);
   const text = (await res.text()).trim();
-  if (!res.ok) throw new Error(text || "Failed to fetch investor");
+
+  if (!res.ok) {
+    throw new Error(text || "Failed to fetch investor");
+  }
+
   return text ? JSON.parse(text) : null;
 }
 
@@ -32,15 +45,20 @@ export async function fetchInvestorById(id) {
 export async function deleteInvestor(id) {
   const res = await fetch(`${BASE}/${id}`, { method: "DELETE" });
   const text = (await res.text()).trim();
-  if (!res.ok) throw new Error(text || "Failed to delete investor");
+
+  if (!res.ok) {
+    throw new Error(text || "Failed to delete investor");
+  }
+
   return text ? JSON.parse(text) : { message: "Deleted" };
 }
-// ✅ UPDATE investor by id
+
+// UPDATE investor by id
 export async function updateInvestor(id, form) {
   const res = await fetch(`${BASE}/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(form)
+    body: JSON.stringify(form),
   });
 
   const text = (await res.text()).trim();

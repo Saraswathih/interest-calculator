@@ -6,8 +6,7 @@ export default function Money() {
   const { state } = useLocation();
   const navigate = useNavigate();
 
-  const [tab, setTab] = useState(state?.tab || "upcoming"); // upcoming | outstanding | transactions
-
+  const [tab, setTab] = useState(state?.tab || "upcoming");
   const [txns, setTxns] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -36,11 +35,17 @@ export default function Money() {
     return String(objOrId);
   };
 
-  // ✅ load real transactions
   useEffect(() => {
     const load = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/transactions");
+        const res = await fetch(
+          "https://interest-calculator-1-t620.onrender.com/api/transactions"
+        );
+
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+
         const data = await res.json();
         setTxns(Array.isArray(data) ? data : []);
       } catch (e) {
@@ -50,12 +55,12 @@ export default function Money() {
         setLoading(false);
       }
     };
+
     load();
   }, []);
 
-  // ✅ build customer outstanding map from transactions
   const customerDueList = useMemo(() => {
-    const map = new Map(); // customerId -> { id, name, outstanding, lastDate }
+    const map = new Map();
 
     for (const t of txns) {
       if (!t.customerId) continue;
@@ -68,7 +73,7 @@ export default function Money() {
           id: cid,
           name: getName(t.customerId),
           outstanding: 0,
-          lastDate: null
+          lastDate: null,
         });
       }
 
@@ -86,13 +91,12 @@ export default function Money() {
       }
     }
 
-    // keep only still due > 0
     return Array.from(map.values()).filter((x) => x.outstanding > 0);
   }, [txns]);
 
-  // ✅ upcoming vs outstanding split (based on 30 days)
   const { upcoming, outstanding } = useMemo(() => {
     const now = new Date();
+
     const daysBetween = (d1, d2) =>
       Math.floor((d2.getTime() - d1.getTime()) / 86400000);
 
@@ -108,21 +112,19 @@ export default function Money() {
         note: c.lastDate ? fmtDate(c.lastDate) : "-",
         due: money(c.outstanding),
         late: `${days} days late`,
-        days
+        days,
       };
 
       if (days > 30) out.push(item);
       else up.push(item);
     }
 
-    // sort (most due first)
     up.sort((a, b) => b.days - a.days);
     out.sort((a, b) => b.days - a.days);
 
     return { upcoming: up, outstanding: out };
   }, [customerDueList]);
 
-  // ✅ transactions list (show latest 20, include investor + customer)
   const txList = useMemo(() => {
     return (txns || [])
       .slice()
@@ -138,7 +140,7 @@ export default function Money() {
           whoType: isCustomer ? "Customer" : "Investor",
           type: t.type === "Taken" ? "Received from" : "Paid to",
           amount: money(t.amount || 0),
-          date: fmtDate(t.startDate)
+          date: fmtDate(t.startDate),
         };
       });
   }, [txns]);
@@ -162,7 +164,7 @@ export default function Money() {
 
   const goToPayment = (person) => {
     navigate(`/payment/${person.id}`, {
-      state: { person: { ...person, due: person.due } }
+      state: { person: { ...person, due: person.due } },
     });
   };
 
@@ -172,7 +174,6 @@ export default function Money() {
         <h3>Money</h3>
       </div>
 
-      {/* Tabs */}
       <div className="money-tabs">
         <button
           className={`tab ${tab === "upcoming" ? "active" : ""}`}
@@ -218,9 +219,7 @@ export default function Money() {
                     <div className="mini-avatar">{item.name[0]}</div>
                     <div>
                       <div className="row-name">{item.name}</div>
-                      <div className="row-sub">
-                        {item.note} (Due Soon)
-                      </div>
+                      <div className="row-sub">{item.note} (Due Soon)</div>
                     </div>
                   </div>
 

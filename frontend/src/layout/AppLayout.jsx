@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import BottomNav from "../components/BottomNav";
-import "../styles/AppLayout.css"; // if you have
+
 
 export default function AppLayout() {
   return (

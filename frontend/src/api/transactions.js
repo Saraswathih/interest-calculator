@@ -1,4 +1,5 @@
-const BASE = "http://localhost:5000/api/transactions";
+// const BASE = "http://localhost:5000/api/transactions";
+const BASE = "https://interest-calculator-1-t620.onrender.com/api/transactions";
 
 // helper: fetch with timeout
 async function fetchWithTimeout(url, options = {}, timeoutMs = 15000) {
@@ -25,7 +26,10 @@ async function parseJsonResponse(res) {
     text.toLowerCase().includes("<body");
 
   if (!res.ok) {
-    if (looksLikeHTML) throw new Error("Wrong API URL / server not reachable (HTML response received)");
+    if (looksLikeHTML) {
+      throw new Error("Wrong API URL / server not reachable (HTML response received)");
+    }
+
     try {
       const err = text ? JSON.parse(text) : {};
       throw new Error(err.message || `Request failed (${res.status})`);
@@ -47,14 +51,14 @@ async function parseJsonResponse(res) {
   }
 }
 
-// ✅ GET all transactions (existing)
+// GET all transactions
 export async function fetchTransactions() {
   const res = await fetchWithTimeout(BASE);
   const data = await parseJsonResponse(res);
   return Array.isArray(data) ? data : [];
 }
 
-// ✅ GET transactions by customerId
+// GET transactions by customerId
 export async function fetchTransactionsByCustomer(customerId) {
   if (!customerId) throw new Error("Customer id is required");
   const res = await fetchWithTimeout(`${BASE}?customerId=${customerId}`);
@@ -62,7 +66,7 @@ export async function fetchTransactionsByCustomer(customerId) {
   return Array.isArray(data) ? data : [];
 }
 
-// ✅ GET transactions by investorId  (NEW)
+// GET transactions by investorId
 export async function fetchTransactionsByInvestor(investorId) {
   if (!investorId) throw new Error("Investor id is required");
   const res = await fetchWithTimeout(`${BASE}?investorId=${investorId}`);
@@ -70,26 +74,25 @@ export async function fetchTransactionsByInvestor(investorId) {
   return Array.isArray(data) ? data : [];
 }
 
-// ✅ POST add transaction (existing, works for customer OR investor)
-// Send either { customerId: "..." } OR { investorId: "..." }
+// POST add transaction
 export async function addTransaction(form) {
   const res = await fetchWithTimeout(`${BASE}/add`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(form)
+    body: JSON.stringify(form),
   });
 
   const data = await parseJsonResponse(res);
   return data && typeof data === "object" ? data : {};
 }
 
-// ✅ Optional helper (NEW): add investor transaction shortcut
+// Optional helper: add investor transaction shortcut
 export async function addInvestorTransaction(investorId, form) {
   if (!investorId) throw new Error("Investor id is required");
   return addTransaction({ ...form, investorId });
 }
 
-// ✅ Optional helper (NEW): add customer transaction shortcut
+// Optional helper: add customer transaction shortcut
 export async function addCustomerTransaction(customerId, form) {
   if (!customerId) throw new Error("Customer id is required");
   return addTransaction({ ...form, customerId });
