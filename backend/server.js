@@ -18,12 +18,16 @@ app.get("/", (req, res) => {
 const MONGO_URI =
   process.env.MONGO_URI || "mongodb://127.0.0.1:27017/interestCalculator";
 
+console.log("Using MONGO_URI:", process.env.MONGO_URI ? "Present" : "Missing");
+
 mongoose
-  .connect(MONGO_URI)
+  .connect(MONGO_URI, {
+    serverSelectionTimeoutMS: 30000,
+  })
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
-// ✅ Import routes (MATCH YOUR FILE NAMES)
+// ✅ Import routes
 const customerRoutes = require("./routes/customerRoutes");
 const transactionRoutes = require("./routes/transactionRoutes");
 
@@ -32,7 +36,6 @@ app.use("/api/customers", customerRoutes);
 app.use("/api/transactions", transactionRoutes);
 app.use("/api/investors", require("./routes/investorRoutes"));
 app.use("/api/dashboard", require("./routes/dashboardRoutes"));
-
 
 // Error handling middleware
 app.use((err, req, res, next) => {
