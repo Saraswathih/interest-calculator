@@ -6,7 +6,10 @@ export default function Profile() {
   const navigate = useNavigate();
 
   // ===================== THEME =====================
-  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "light");
+  const [theme, setTheme] = useState(
+    () => localStorage.getItem("theme") || "light"
+  );
+
   const [showThemeSheet, setShowThemeSheet] = useState(false);
 
   useEffect(() => {
@@ -19,9 +22,13 @@ export default function Profile() {
 
   const [profile, setProfile] = useState(() => {
     const saved = localStorage.getItem("profile");
+
     return saved
       ? JSON.parse(saved)
-      : { name: "Saraswathi", role: "Customer Account" };
+      : {
+          name: "Saraswathi",
+          role: "Customer Account",
+        };
   });
 
   const [draft, setDraft] = useState(profile);
@@ -33,27 +40,61 @@ export default function Profile() {
     border: "1px solid var(--border)",
     background: "var(--card)",
     outline: "none",
-    color: "var(--text)"
+    color: "var(--text)",
+  };
+
+  // ===================== SAVE PROFILE =====================
+  const saveProfile = () => {
+    const cleaned = {
+      name: (draft.name || "Saraswathi").trim(),
+      role: (draft.role || "Customer Account").trim(),
+    };
+
+    // Update this page
+    setProfile(cleaned);
+
+    // Save permanently in browser
+    localStorage.setItem("profile", JSON.stringify(cleaned));
+
+    // Tell other React pages/components that profile changed
+    window.dispatchEvent(
+      new CustomEvent("profileUpdated", {
+        detail: cleaned,
+      })
+    );
+
+    setShowEdit(false);
   };
 
   return (
     <div className="profile-page">
+
+      {/* ===================== HEADER ===================== */}
       <div className="profile-header">
-        <button className="back-btn" onClick={() => navigate("/")}>
+        <button
+          className="back-btn"
+          onClick={() => navigate("/")}
+        >
           ←
         </button>
+
         <h3>Profile</h3>
+
         <div className="ghost" />
       </div>
 
+      {/* ===================== PROFILE CARD ===================== */}
       <div className="profile-card">
-        <div className="avatar">{(profile.name || "S")[0]?.toUpperCase()}</div>
+
+        <div className="avatar">
+          {(profile.name || "S")[0]?.toUpperCase()}
+        </div>
+
         <div className="profile-meta">
           <h4>{profile.name}</h4>
           <p>{profile.role}</p>
         </div>
 
-        {/* ✅ Edit now works */}
         <button
           className="edit-btn"
           type="button"
@@ -66,19 +107,32 @@ export default function Profile() {
         </button>
       </div>
 
+      {/* ===================== SETTINGS ===================== */}
       <div className="settings-card">
-        <button className="setting-row" type="button">
+
+        {/* Language */}
+        <button
+          className="setting-row"
+          type="button"
+        >
           <div className="row-left">
             <span className="row-icon">🌐</span>
+
             <div>
-              <div className="row-title">Change language</div>
-              <div className="row-sub">English</div>
+              <div className="row-title">
+                Change language
+              </div>
+
+              <div className="row-sub">
+                English
+              </div>
             </div>
           </div>
+
           <span className="chev">›</span>
         </button>
 
-        {/* ✅ Theme row now works */}
+        {/* Theme */}
         <button
           className="setting-row active"
           type="button"
@@ -86,15 +140,22 @@ export default function Profile() {
         >
           <div className="row-left">
             <span className="row-icon">🌓</span>
+
             <div>
-              <div className="row-title">Theme</div>
-              <div className="row-sub">{theme === "light" ? "Light" : "Dark"}</div>
+              <div className="row-title">
+                Theme
+              </div>
+
+              <div className="row-sub">
+                {theme === "light" ? "Light" : "Dark"}
+              </div>
             </div>
           </div>
+
           <span className="chev">›</span>
         </button>
 
-        {/* ✅ Storage row now opens a real page */}
+        {/* Storage */}
         <button
           className="setting-row"
           type="button"
@@ -102,108 +163,187 @@ export default function Profile() {
         >
           <div className="row-left">
             <span className="row-icon">💾</span>
+
             <div>
-              <div className="row-title">Storage</div>
-              <div className="row-sub">View usage</div>
+              <div className="row-title">
+                Storage
+              </div>
+
+              <div className="row-sub">
+                View usage
+              </div>
             </div>
           </div>
+
           <span className="chev">›</span>
         </button>
 
-        <button className="setting-row" type="button">
+        {/* ===================== EXPORT ===================== */}
+        <button
+          className="setting-row"
+          type="button"
+          onClick={() => navigate("/export")}
+        >
           <div className="row-left">
             <span className="row-icon">⬇️</span>
+
             <div>
-              <div className="row-title">Export</div>
-              <div className="row-sub">Download data</div>
+              <div className="row-title">
+                Export
+              </div>
+
+              <div className="row-sub">
+                Download data
+              </div>
             </div>
           </div>
+
           <span className="chev">›</span>
         </button>
       </div>
 
-      <button className="logout-card" type="button">
-        Log Out <span className="logout-chev">›</span>
+      {/* ===================== LOGOUT ===================== */}
+      <button
+        className="logout-card"
+        type="button"
+      >
+        Log Out
+        <span className="logout-chev">›</span>
       </button>
 
-      {/* ✅ Theme Bottom Sheet */}
+      {/* ===================== THEME BOTTOM SHEET ===================== */}
       {showThemeSheet && (
-        <div className="sheet-backdrop" onClick={() => setShowThemeSheet(false)}>
-          <div className="sheet" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="sheet-backdrop"
+          onClick={() => setShowThemeSheet(false)}
+        >
+          <div
+            className="sheet"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="sheet-handle" />
-            <h4 className="sheet-title">Choose Theme</h4>
+
+            <h4 className="sheet-title">
+              Choose Theme
+            </h4>
 
             <button
-              className={`sheet-option ${theme === "light" ? "selected" : ""}`}
+              className={`sheet-option ${
+                theme === "light" ? "selected" : ""
+              }`}
               onClick={() => setTheme("light")}
             >
-              ☀️ Light {theme === "light" && <span className="tick">✓</span>}
+              ☀️ Light
+
+              {theme === "light" && (
+                <span className="tick">✓</span>
+              )}
             </button>
 
             <button
-              className={`sheet-option ${theme === "dark" ? "selected" : ""}`}
+              className={`sheet-option ${
+                theme === "dark" ? "selected" : ""
+              }`}
               onClick={() => setTheme("dark")}
             >
-              🌙 Dark {theme === "dark" && <span className="tick">✓</span>}
+              🌙 Dark
+
+              {theme === "dark" && (
+                <span className="tick">✓</span>
+              )}
             </button>
 
-            <button className="sheet-close" onClick={() => setShowThemeSheet(false)}>
+            <button
+              className="sheet-close"
+              onClick={() => setShowThemeSheet(false)}
+            >
               Done
             </button>
           </div>
         </div>
       )}
 
-      {/* ✅ Edit Profile Bottom Sheet */}
+      {/* ===================== EDIT PROFILE ===================== */}
       {showEdit && (
-        <div className="sheet-backdrop" onClick={() => setShowEdit(false)}>
-          <div className="sheet" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="sheet-backdrop"
+          onClick={() => setShowEdit(false)}
+        >
+          <div
+            className="sheet"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="sheet-handle" />
-            <h4 className="sheet-title">Edit Profile</h4>
 
-            <div style={{ display: "grid", gap: "10px" }}>
+            <h4 className="sheet-title">
+              Edit Profile
+            </h4>
+
+            <div
+              style={{
+                display: "grid",
+                gap: "10px",
+              }}
+            >
+
+              {/* Name */}
               <div>
-                <div className="row-title" style={{ marginBottom: "6px" }}>
+                <div
+                  className="row-title"
+                  style={{ marginBottom: "6px" }}
+                >
                   Name
                 </div>
+
                 <input
                   value={draft.name}
-                  onChange={(e) => setDraft({ ...draft, name: e.target.value })}
+                  onChange={(e) =>
+                    setDraft({
+                      ...draft,
+                      name: e.target.value,
+                    })
+                  }
                   placeholder="Enter name"
                   style={inputStyle}
                 />
               </div>
 
+              {/* Role */}
               <div>
-                <div className="row-title" style={{ marginBottom: "6px" }}>
+                <div
+                  className="row-title"
+                  style={{ marginBottom: "6px" }}
+                >
                   Role
                 </div>
+
                 <input
                   value={draft.role}
-                  onChange={(e) => setDraft({ ...draft, role: e.target.value })}
+                  onChange={(e) =>
+                    setDraft({
+                      ...draft,
+                      role: e.target.value,
+                    })
+                  }
                   placeholder="Enter role"
                   style={inputStyle}
                 />
               </div>
 
+              {/* Save */}
               <button
                 className="sheet-close"
-                onClick={() => {
-                  const cleaned = {
-                    name: (draft.name || "Saraswathi").trim(),
-                    role: (draft.role || "Customer Account").trim()
-                  };
-                  setProfile(cleaned);
-                  localStorage.setItem("profile", JSON.stringify(cleaned));
-                  setShowEdit(false);
-                }}
+                onClick={saveProfile}
               >
                 Save Changes
               </button>
 
+              {/* Cancel */}
               <button
                 className="sheet-close"
-                style={{ background: "rgba(0,0,0,0.06)" }}
+                style={{
+                  background: "rgba(0,0,0,0.06)",
+                }}
                 onClick={() => setShowEdit(false)}
               >
                 Cancel
@@ -212,6 +352,7 @@ export default function Profile() {
           </div>
         </div>
       )}
+
     </div>
   );
 }

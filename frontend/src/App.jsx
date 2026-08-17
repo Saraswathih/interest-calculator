@@ -8,7 +8,7 @@ import Portfolio from "./pages/Portfolio";
 import Investments from "./pages/Investments";
 import Profile from "./pages/Profile";
 import Money from "./pages/Money";
-
+import Export from "./pages/Export";
 /* Payment flow pages */
 import Payment from "./pages/payment/Payment";
 import SelectCard from "./pages/payment/SelectCard";
@@ -66,7 +66,7 @@ export default function App() {
       <Route path="/calculator" element={<InterestCalculator />} />
       <Route path="/reminders" element={<Reminders />} />
       <Route path="/add-investor" element={<AddInvestor />} />
-
+      <Route path="/export" element={<Export />} />
       {/* 404 */}
       <Route path="*" element={<Home />} />
     </Routes>
